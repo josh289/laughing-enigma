@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+ <head>
+<title>Course Launcher Page</title>		
+
+<script type="text/javascript" src="tc-config.js"></script>
+</head>
+
+  <body>
+  <script>
+  
+  //./index_rise.html?endpoint=https%3A%2F%2Fxaro-yhxq-r3hw.n7.xano.io%2Fapi%3A3Oza2_sj%2Frise&auth=Basic Rk45QjhTUTZOMzo5UElDZ0tsdVp6c1VtN3AwOUlIUUtwYmdDZmpXdk85bE5FcUZCQTdz&actor=%7B%22name%22%3A%20%5B%22First%20Last%22%5D%2C%20%22mbox%22%3A%20%5B%22mailto%3Afirstlast%40mycompany.com%22%5D%7D&activity_id=61XkSYC1ht2_course_id&registration=760e3480-ba55-4991-94b0-01820dbd23a2
+  
+  //get user from eFront to create custom url
+  let eFrontUser = "";
+  eFrontUser = parent.document.getElementsByClassName("dropdown-item ef-switch-account current")[0].children[2].innerHTML;  
+  console.log(eFrontUser);
+  
+  //replace this with generation of UUID at server
+  function uuidv4() {
+	return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+		(c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+	);
+	}
+	
+  let activityID = TC_COURSE_ID.substring(7);
+  console.log(activityID);
+  //let activityID = "n6GHXBpydXxf3nK1kyM5C-qWegPJOA7e_rise";  
+  
+  let launchURL = "./index_rise.html?endpoint=https%3A%2F%2Fxaro-yhxq-r3hw.n7.xano.io%2Fapi%3A3Oza2_sj%2Frise&auth=Basic Rk45QjhTUTZOMzo5UElDZ0tsdVp6c1VtN3AwOUlIUUtwYmdDZmpXdk85bE5FcUZCQTdz&actor=%7B%22name%22%3A%20%5B%22";
+  launchURL = launchURL + eFrontUser + "%22%5D%2C%20%22mbox%22%3A%20%5B%22mailto%3Afirstlast%40mycompany.com%22%5D%7D&activity_id=";  
+  let registrationID = uuidv4(); //replace with generation at server level
+  launchURL = launchURL + activityID + "&registration=" + registrationID;
+  console.log(launchURL);
+  
+
+  
+  window.onload = function() {
+          let a = document.getElementById("courseLink");
+          a.onclick = function() {
+            window.open (launchURL,'_self',false);
+            return false;
+          };
+          function(){
+    $('.courseLink').trigger('click');
+};
+        }
+ 
+
+
+
+  
+  </script>
+  
+  <a id="courseLink" href="">Open Course</a>
+  </body>
+</html>
